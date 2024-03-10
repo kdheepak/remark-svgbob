@@ -1,8 +1,6 @@
 import { visit } from "unist-util-visit";
 import type { Node } from "unist";
 import bob from "bob-wasm";
-import { isElement } from "hast-util-is-element";
-import { hasProperty as has, hasProperty } from "hast-util-has-property";
 
 interface CodeNode extends Node {
   lang?: string;
