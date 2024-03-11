@@ -18,7 +18,6 @@ rendered as high-quality SVG images in the resulting HTML.
 
 - `remark-svgbob` detects code blocks tagged with a specific language identifier (e.g., `svgbob`) in
   your Markdown and replaces them with corresponding SVG images.
-- Customize the appearance of the SVG output with `svgbob`'s configuration options.
 - SVG output is scalable and styleable with CSS, making it perfect for responsive designs.
 
 ## Installation
@@ -38,7 +37,7 @@ import remark from "remark";
 import remarkSVGBob from "remark-svgbob";
 
 remark()
-  .use(remarkSVGBob, options)
+  .use(remarkSVGBob)
   .process(markdown, function (err, file) {
     if (err) throw err;
     console.log(String(file));
@@ -121,20 +120,6 @@ Use a code block with the language `svgbob`
 ```
 
 </details>
-
-## Options
-
-You can pass configuration options to `remark-svgbob`:
-
-```js
-const options = {
-  // `svgbob` options go here
-};
-
-remark().use(remarkSVGBob, options);
-```
-
-Refer to the `svgbob` documentation for available configuration options.
 
 ## Contributing
 
