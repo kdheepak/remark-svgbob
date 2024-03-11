@@ -1,6 +1,6 @@
 {
   "name": "remark-svgbob",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A remark plugin to convert a markdown codeblock with ascii art to svg",
   "scripts": {
     "build": "tsup src/index.ts --format esm --dts --clean",
