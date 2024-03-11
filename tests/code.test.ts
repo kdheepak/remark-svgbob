@@ -5,25 +5,17 @@ import { remark } from "remark";
 test("converts svgbob ascii to svg", async () => {
   const content = "svg";
   const md = `
-  # Some title
+Use a code block with the language \`svgbob\`
 
-  \`\`\`svgbob
-  ,-------------.
-  |Get Key Event|
-  \`-----+-------'
-        |
-        |
-  ,-----v------.
-  |Update State|
-  \`-----+------'
-        |
-        |
-    ,---v----.
-    | Render |
-    \`--------'
-  \`\`\`
-
-  Some block of text
+\`\`\`svgbob
+       .---.
+      /-o-/--
+   .-/ / /->
+  ( *  \/
+   '-.  \
+      \ /
+       '
+\`\`\`
   `.trim();
   const processor = remark().use(svgBobCode);
   const result = await processor.process(md);
