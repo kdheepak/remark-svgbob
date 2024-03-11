@@ -1,5 +1,10 @@
 # remark-svgbob
 
+![npm](https://img.shields.io/npm/v/remark-svgbob)
+![NPM Downloads](https://img.shields.io/npm/dm/remark-svgbob)
+![License](https://img.shields.io/npm/l/remark-svgbob)
+[![Code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
+
 `remark-svgbob` is a plugin for [Remark](https://github.com/remarkjs/remark), a Markdown processor
 powered by plugins part of the unified collective, that converts ASCII diagrams within code blocks
 into crisp SVG images using the [`svgbob`](https://github.com/ivanceras/svgbob) tool.
