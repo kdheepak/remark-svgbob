@@ -33,7 +33,6 @@
     "svgbob"
   ],
   "dependencies": {
-    "bob-wasm": "^1.0.1",
     "unist-util-visit": "^5.0.0"
   }
 }
