@@ -22,3 +22,11 @@ Use a code block with the language \`svgbob\`
   console.log(result.toString());
   expect(result.toString()).toContain(content);
 });
+
+test('works fine with multiple calls', async () => {
+  const processor = remark().use(svgBobCode);
+  await processor.process(`\`\`\`svgbob\nn\n\`\`\``);
+  await processor.process(`\`\`\`svgbob\ni\n\`\`\``);
+  await processor.process(`\`\`\`svgbob\nc\n\`\`\``);
+  await processor.process(`\`\`\`svgbob\ne\n\`\`\``);
+})
