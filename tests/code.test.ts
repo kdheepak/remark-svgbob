@@ -1,6 +1,7 @@
 import { test, expect } from "vitest";
 import svgBobCode from "../src/index";
 import { remark } from "remark";
+import remarkMDX from "remark-mdx";
 
 test("converts svgbob ascii to svg", async () => {
   const content = "svg";
@@ -17,14 +18,14 @@ Use a code block with the language \`svgbob\`
        '
 \`\`\`
   `.trim();
-  const processor = remark().use(svgBobCode);
+  const processor = remark().use(remarkMDX).use(svgBobCode);
   const result = await processor.process(md);
   console.log(result.toString());
   expect(result.toString()).toContain(content);
 });
 
 test('works fine with multiple calls', async () => {
-  const processor = remark().use(svgBobCode);
+  const processor = remark().use(remarkMDX).use(svgBobCode);
   await processor.process(`\`\`\`svgbob\nn\n\`\`\``);
   await processor.process(`\`\`\`svgbob\ni\n\`\`\``);
   await processor.process(`\`\`\`svgbob\nc\n\`\`\``);
