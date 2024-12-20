@@ -11,6 +11,7 @@
         "license": "MIT",
         "devDependencies": {
                 "remark": "^15.0.1",
+                "remark-mdx": "^3.1.0",
                 "ts-node": "^10.9.2",
                 "tsup": "^8.0.2",
                 "typescript": "^5.4.2",

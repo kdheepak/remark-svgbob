@@ -1,6 +1,7 @@
 import { visit } from "unist-util-visit";
 import type { Node } from "unist";
 import { getRenderer } from "./svgbob-wasm";
+import { Buffer } from "node:buffer";
 
 interface CodeNode extends Node {
   lang?: string;
@@ -14,11 +15,19 @@ export const remarkPlugin = () => {
 
     visit(tree, "code", (node: CodeNode, index: any, parent: any) => {
       if (node.lang === "svgbob") {
-        const value = node.value;
-        const svg = render(value);
+        const svg = render(node.value);
+        const buffer = Buffer.from(svg, "utf8");
+        const base64SVG = buffer.toString("base64");
+        const imgSrc = `data:image/svg+xml;base64,${base64SVG}`;
+
         const image = {
-          type: "html",
-          value: `<span>${svg}</span>`,
+          type: "mdxJsxFlowElement",
+          name: "img",
+          attributes: [
+            { type: "mdxJsxAttribute", name: "src", value: imgSrc },
+            { type: "mdxJsxAttribute", name: "alt", value: "svgbob" },
+          ],
+          children: [],
         };
 
         parent.children.splice(index, 1, image);
