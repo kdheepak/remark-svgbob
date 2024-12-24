@@ -44,6 +44,15 @@ remark()
   });
 ```
 
+Styling for the SVG has been moved to an external css file so that it can easly be modified to meet
+your requirements.  The vanilla css is included in `src/svgbob.css`.  You will need to include this
+stylesheet in your project, otherwise you will be presented with a black box instead of your SVG.
+
+The benifit of doing this is if for example you have a dark mode setting on your site, with the
+foreground color being set by a css var, you can easily style the SVG to respond to the forground
+var.
+
+
 Then write markdown 
 
 ````markdown
@@ -69,9 +78,6 @@ Use a code block with the language `svgbob`
 
 <span><svg xmlns="http://www.w3.org/2000/svg" width="136" height="112">
     <style>
-        line, path, circle, rect, polygon{stroke:black;stroke-width:2;stroke-opacity:1;fill-opacity:1;stroke-linecap:round;stroke-linejoin:miter;}text{font-family:Iosevka Fixed, monospace;font-size:14px;}rect.backdrop{stroke:none;fill:transparent;}.broken{stroke-dasharray:8;}.filled{fill:black;}.bg_filled{fill:transparent;}.nofill{fill:transparent;}.end_marked_arrow{marker-end:url(#arrow);}.start_marked_arrow{marker-start:url(#arrow);}.end_marked_diamond{marker-end:url(#diamond);}.start_marked_diamond{marker-start:url(#diamond);}.end_marked_circle{marker-end:url(#circle);}.start_marked_circle{marker-start:url(#circle);}.end_marked_open_circle{marker-end:url(#open_circle);}.start_marked_open_circle{marker-start:url(#open_circle);}.end_marked_big_open_circle{marker-end:url(#big_open_circle);}.start_marked_big_open_circle{marker-start:url(#big_open_circle);}
-        <!--separator-->
-
     </style>
     <defs>
         <marker id="arrow" viewBox="-2 -2 8 8" refX="4" refY="2" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
