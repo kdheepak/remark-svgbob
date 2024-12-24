@@ -2,6 +2,7 @@ import { visit } from "unist-util-visit";
 import type { Node } from "unist";
 import { getRenderer } from "./svgbob-wasm";
 import { fromHtml } from "hast-util-from-html";
+import { toHtml } from "hast-util-to-html";
 import { MdxJsxAttribute, MdxJsxFlowElement } from "mdast-util-mdx-jsx";
 import { Root, Element as HASTElement, Text as HASTText, Properties, RootContent } from "hast";
 
@@ -40,7 +41,7 @@ function isText(node: RootContent): node is HASTText {
   return node?.type == "text";
 }
 
-function processHastElement(node: RootContent): MdxJsxFlowElement | undefined {
+function processMdxHastElement(node: RootContent): MdxJsxFlowElement | undefined {
   let ret = undefined;
   if (isElement(node)) {
     // Deal with text nodes separately so that we don't recursively place whitespace only
@@ -58,8 +59,9 @@ function processHastElement(node: RootContent): MdxJsxFlowElement | undefined {
         name: node.tagName,
         attributes: processHastAttributes(node.properties),
         children:
-          node?.children.map((child) => processHastElement(child)).filter((n) => n != undefined) ||
-          [],
+          node?.children
+            .map((child) => processMdxHastElement(child))
+            .filter((n) => n != undefined) || [],
       };
     }
   }
@@ -101,10 +103,11 @@ export const remarkPlugin = (options: RemarkPluginOptions = {}) => {
           // The first (and only) child of the root node will an svg element
           let element = hast.children[0];
           // Recursively process the elements into mdxJsxFlowElements or HAST elements
-          let image = processHastElement(element);
+          let image = processMdxHastElement(element);
           // Replace the code node with the image node
           parent.children.splice(index, 1, image);
         } else {
+          // TODO: Make this feature compatible with MDX
           const image = {
             type: "html",
             value: `<span>${svg}</span>`,
