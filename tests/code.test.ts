@@ -34,16 +34,32 @@ test("converts svgbob ascii to svg with mdx", async () => {
 
 test("works fine with multiple calls with mdx", async () => {
   const processor = remark().use(remarkMDX).use(remarkSVGBob, { useMdx: true });
-  await processor.process(`\`\`\`svgbob\nn\n\`\`\``);
-  await processor.process(`\`\`\`svgbob\ni\n\`\`\``);
-  await processor.process(`\`\`\`svgbob\nc\n\`\`\``);
-  await processor.process(`\`\`\`svgbob\ne\n\`\`\``);
+  const r1 = await processor.process(`\`\`\`svgbob\nhello\n\`\`\``);
+  expect(r1.toString()).toContain("<svg");
+  expect(r1.toString()).toContain("hello");
+  const r2 = await processor.process(`\`\`\`svgbob\nworld\n\`\`\``);
+  expect(r2.toString()).toContain("<svg");
+  expect(r2.toString()).toContain("world");
+  const r3 = await processor.process(`\`\`\`svgbob\ngoodbye\n\`\`\``);
+  expect(r3.toString()).toContain("<svg");
+  expect(r3.toString()).toContain("goodbye");
+  const r4 = await processor.process(`\`\`\`svgbob\nworld\n\`\`\``);
+  expect(r4.toString()).toContain("<svg");
+  expect(r4.toString()).toContain("world");
 });
 
 test("works fine with multiple calls without mdx", async () => {
-  const processor = remark().use(remarkSVGBob, { useMdx: false });
-  await processor.process(`\`\`\`svgbob\nn\n\`\`\``);
-  await processor.process(`\`\`\`svgbob\ni\n\`\`\``);
-  await processor.process(`\`\`\`svgbob\nc\n\`\`\``);
-  await processor.process(`\`\`\`svgbob\ne\n\`\`\``);
+  const processor = remark().use(remarkSVGBob);
+  const r1 = await processor.process(`\`\`\`svgbob\nhello\n\`\`\``);
+  expect(r1.toString()).toContain("<svg");
+  expect(r1.toString()).toContain("hello");
+  const r2 = await processor.process(`\`\`\`svgbob\nworld\n\`\`\``);
+  expect(r2.toString()).toContain("<svg");
+  expect(r2.toString()).toContain("world");
+  const r3 = await processor.process(`\`\`\`svgbob\ngoodbye\n\`\`\``);
+  expect(r3.toString()).toContain("<svg");
+  expect(r3.toString()).toContain("goodbye");
+  const r4 = await processor.process(`\`\`\`svgbob\nworld\n\`\`\``);
+  expect(r4.toString()).toContain("<svg");
+  expect(r4.toString()).toContain("world");
 });

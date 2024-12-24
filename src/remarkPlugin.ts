@@ -110,7 +110,7 @@ export const remarkPlugin = (options: RemarkPluginOptions = {}) => {
           // TODO: Make this feature compatible with MDX
           const image = {
             type: "html",
-            value: `<span>${svg}</span>`,
+            value: `${svg}`,
           };
           parent.children.splice(index, 1, image);
         }
